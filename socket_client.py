@@ -1,17 +1,13 @@
+# computer_a.py
 import socket
 
-HOST = '127.0.0.1'  # server IP
-PORT = 12345
+HOST = '192.168.0.103'  # replace with B's LAN IP
+PORT = 9999
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((HOST, PORT))
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect((HOST, PORT))
 
-while True:
-    msg = input("Enter message to send: ")
-    if msg.lower() == "exit":
-        break
-    client.sendall(msg.encode())
-    data = client.recv(1024)
-    print("Received from server:", data.decode())
+# send hello world
+sock.sendall(b"Hello World from Computer A!")
 
-client.close()
+sock.close()

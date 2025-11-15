@@ -3,7 +3,13 @@ import cv2
 import mediapipe as mp
 import pyautogui
 import numpy as np
+import socket
+import json
+HOST = '192.168.1.92'  # replace with B's LAN IP
+PORT = 9999
 
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect((HOST, PORT))
 # ---------------------------
 # Pose setup
 # ---------------------------
@@ -17,6 +23,12 @@ pose = mp_pose.Pose(
 )
 
 cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920) # Example: HD width
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080) # Example: HD height
+# BEFORE your loop
+cv2.namedWindow("Pose & Hand Tracker", cv2.WINDOW_NORMAL)  # allow resizing
+cv2.setWindowProperty("Pose & Hand Tracker", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
 if not cap.isOpened():
     raise RuntimeError("Could not open webcam. Check camera permissions and device index.")
 
@@ -43,6 +55,8 @@ feedback_pos = (0, 0)
 direction = "CENTER"
 action = "NONE"
 paused = False
+
+socketDataChanged=False
 
 # ---------------------------
 # Helpers
@@ -106,7 +120,8 @@ try:
                 # Direction logic
                 if left_ear_px[0] < center_x and right_ear_px[0] < center_x:
                     if direction == "CENTER":
-                        pyautogui.press("left")
+                        socketDataChanged=True
+                        action_to_send="LEFT"
                         feedback_text = "LEFT!"
                         feedback_pos = (center_x - 50, 50)
                         last_action_time = time.time()
@@ -114,7 +129,8 @@ try:
 
                 elif left_ear_px[0] > center_x and right_ear_px[0] > center_x:
                     if direction == "CENTER":
-                        pyautogui.press("right")
+                        socketDataChanged=True
+                        action_to_send="RIGHT"
                         feedback_text = "RIGHT!"
                         feedback_pos = (center_x - 50, 50)
                         last_action_time = time.time()
@@ -133,7 +149,8 @@ try:
                 # Actions
                 if wrist_px[1] < center_y:
                     if action == "NONE":
-                        pyautogui.press("up")
+                        socketDataChanged=True
+                        action_to_send="UP"
                         feedback_text = "UP!"
                         feedback_pos = (center_x - 40, 100)
                         last_action_time = time.time()
@@ -141,7 +158,8 @@ try:
 
                 elif index_px[1] > center_y:
                     if action == "NONE":
-                        pyautogui.press("down")
+                        socketDataChanged=True
+                        action_to_send="DOWN"
                         feedback_text = "DOWN!"
                         feedback_pos = (center_x - 50, 100)
                         last_action_time = time.time()
@@ -160,8 +178,10 @@ try:
         # Feedback popup
         if time.time() - last_action_time < 0.6:
             draw_text_with_shadow(frame, feedback_text, feedback_pos, FONT, 1.6, FEEDBACK_COLOR, 4)
-
-        cv2.imshow("Pose & Hand Tracker", frame)
+        if socketDataChanged:
+            sock.sendall(json.dumps({"action": action_to_send}).encode())
+            socketDataChanged=False
+        cv2.imshow("Pose & Hand Tracker", frame, )
 
 finally:
     cap.release()
