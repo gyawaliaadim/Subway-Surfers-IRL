@@ -2,17 +2,18 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
 const Page = () => {
   const [usersList, setUsersList] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editData, setEditData] = useState({ name: "", age: "", score: "" });
-
+  const router = useRouter();
   // Fetch users
   const fetchUsers = async () => {
     try {
       const res = await axios.get("/api/userData");
       setUsersList(res.data);
+      console.log(res)
     } catch (err) {
       console.error("Error fetching users:", err);
     }
@@ -50,14 +51,23 @@ const Page = () => {
   };
 
   return (
-    <div className="p-6 w-full flex flex-col items-center gap-6 min-h-screen bg-gray-100">
-      <h1 className="text-5xl font-extrabold text-yellow-400 mb-6 text-shadow-2xs">Score Board</h1>
+    <div className="p-6 w-full flex flex-col items-center gap-6 min-h-screen ">
+      <div className="w-full max-w-5xl rounded-3xl shadow-lg overflow-x-auto bg-yellow-50">
+        <div className="flex justify-between px-4 w-full mt-2">
+          <h1 className="text-5xl font-extrabold text-yellow-400 mb-6 text-shadow-2xs">Score Board</h1>
 
-      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-lg overflow-x-auto">
+             {/* <button className="flex items-center gap-3 p-2 rounded-xl border border-gray-200 shadow-sm hover:shadow-md active:scale-95 transition"> */}
+      <div 
+      onClick={()=>router.push("/")}
+      className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center cursor-pointer hover:bg-yellow-200">
+        <span className="text-yellow-600 font-bold text-lg">+</span>
+      </div>
+    {/* </button> */}
+        </div>
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-yellow-400 text-gray-900">
             <tr>
-                <th className="px-6 py-3 text-left text-lg font-bold uppercase">Picture</th>
+              <th className="px-6 py-3 text-left text-lg font-bold uppercase">Picture</th>
               <th className="px-6 py-3 text-left text-lg font-bold uppercase">Name</th>
               <th className="px-6 py-3 text-left text-lg font-bold uppercase">Age</th>
               <th className="px-6 py-3 text-left text-lg font-bold uppercase">Score</th>
@@ -72,13 +82,13 @@ const Page = () => {
                 </td>
               </tr>
             ) : (
-              usersList.map((user) => (
+              usersList.map((user, index) => (
                 <tr key={user.id} className="hover:bg-yellow-200 transition">
                   {editingId === user.id ? (
                     <>
-                    <td>
+                      <td>
                         <></>
-                    </td>
+                      </td>
                       <td className="px-6 py-4">
                         <input
                           type="text"
@@ -119,17 +129,10 @@ const Page = () => {
                       </td>
                     </>
                   ) : (
-                    <>
-                    <td className=" px-6 py-4 "><Image
-                    alt="information svg"
-                    className="cursor-pointer"
-                    src="/information.svg"
-                    width={24}
-                    height={24}
-                    onClick={()=>handleGetInfo()}
-                    />
+                    <><td className="px-6 py-4 flex w-full h-full justify-center items-center">
+  {index === 0 ? <p className="text-4xl">🥇</p> : index === 1 ? <p className="text-4xl">🥈</p> : index === 2 ?  <p className="text-4xl">🥉</p> : <p className="text-xl">{index + 1}</p>}
+</td>
 
-                    </td>
                       <td className="px-6 py-4">{user.name}</td>
                       <td className="px-6 py-4">{user.age} yrs</td>
                       <td className="px-6 py-4">{user.score}</td>

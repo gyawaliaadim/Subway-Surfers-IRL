@@ -17,7 +17,18 @@ export async function POST(req){
         newUserData.id = uuidv4();
         newUserData.name = name;
         newUserData.age = age;
-        if (photo) newUserData.photo = photo;
+        if (photo) {
+          // Accept data URL ("data:image/png;base64,...") or raw base64
+          if (typeof photo === "string" && photo.startsWith("data:")) {
+            const base64 = photo.split(",")[1];
+            newUserData.photo = Buffer.from(base64, "base64");
+          } else if (typeof photo === "string") {
+            // assume base64 without prefix
+            newUserData.photo = Buffer.from(photo, "base64");
+          } else {
+            newUserData.photo = photo;
+          }
+        }
         // Check if user with this id already exists
         const newUser = new User(newUserData);
         await newUser.save();
@@ -36,12 +47,14 @@ export async function POST(req){
 export async function GET() {
   try {
     await connectDb();
-    const users = await User.find({});
+    // Sort by score descending
+    const users = await User.find({}).sort({ score: -1 });
     return new Response(JSON.stringify(users), { status: 200 });
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), { status: 500 });
   }
 }
+
 
 // DELETE a user by id
 export async function DELETE(req) {
@@ -65,7 +78,7 @@ export async function DELETE(req) {
 export async function PUT(req) {
   try {
     const body = await req.json();
-    const { id, name, age, score } = body;
+    const { id, name, age, score, photo } = body;
     console.log(id, name, age, score);
     if (!id) return new Response(JSON.stringify({ error: "ID is required" }), { status: 400 });
   const updatedData = {};
@@ -73,6 +86,16 @@ export async function PUT(req) {
     if (name !== undefined) updatedData.name = name;
     if (age !== undefined) updatedData.age = age;
     if (score !== undefined) updatedData.score = score;
+    if (photo !== undefined && photo !== null) {
+      if (typeof photo === "string" && photo.startsWith("data:")) {
+        const base64 = photo.split(",")[1];
+        updatedData.photo = Buffer.from(base64, "base64");
+      } else if (typeof photo === "string") {
+        updatedData.photo = Buffer.from(photo, "base64");
+      } else {
+        updatedData.photo = photo;
+      }
+    }
     await connectDb();
     const updatedUser = await User.findOneAndUpdate(
       { id: id },

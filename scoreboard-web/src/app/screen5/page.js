@@ -38,7 +38,6 @@ const Screen5 = () => {
     <div className="flex justify-center flex-col items-center gap-6">
       <h2 style={{ fontSize: "2.5rem" }}>How much did you score {userData.name.split(" ")[0]}?</h2>
       
-      <div>{userData.id}</div>
       <div>
 
       <input
