@@ -38,10 +38,10 @@ pip install opencv-python mediapipe pyautogui
 python client.py
 ```
 When prompted choose:
-- s → server mode (send commands to remote gaming PC)
+- s → server mode (send commands to remote Computer B)
 - c → local/client mode (control the same PC for testing)
 
-3. On the gaming PC (Computer B) run:
+3. On the Computer B run:
 ```terminal
 python server.py
 ```
@@ -62,7 +62,7 @@ WIDTH = 1920
   - left/mid/right lane changes → simulated left/right arrow keys
   - nose up → jump (up arrow)
   - nose down → slide/roll (down arrow)
-- server.py receives network commands (optional) and simulates keypresses on the gaming PC (or local when in client test mode).
+- server.py receives network commands (optional) and simulates keypresses on the computer PC (or local when in client test mode).
 
 ## Controls / Keys
 - P → Pause / unpause tracking
@@ -81,7 +81,7 @@ WIDTH = 1920
 
 ## Troubleshooting
 - “Connection refused”: verify COMPUTER_B_IP and that both devices are on the same network.
-- No key presses on the gaming PC: ensure the server is allowed through Windows Firewall and the game window is focused (some games block simulated inputs).
+- No key presses on the computer B PC: ensure the server is allowed through Windows Firewall and the game window is focused (some games block simulated inputs).
 - Laggy video/poor detection: lower camera resolution, use a better camera, or change model params.
 
 ## Privacy & safety

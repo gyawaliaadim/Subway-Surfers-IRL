@@ -74,8 +74,8 @@ Next.js web application that displays live player scores and manages leaderboard
 - Beautiful animated UI with Tailwind CSS
 - RESTful API for score management
 
-**Quick Start:**<br>
-Make a .env.local inside it with your connection string for MONGODB_URI
+**Quick Start:**
+Create a `.env.local` file with your MongoDB connection string:
 ```bash
 cd scoreboard-web
 npm install
@@ -146,6 +146,7 @@ pip install -r requirements.txt
 ### For Scoreboard Web
 - **Node.js 16+** with npm
 - **MongoDB** (local or cloud via Atlas)
+
 ---
 
 ## 🎮 Controls & Actions
@@ -187,7 +188,7 @@ pip install -r requirements.txt
 
 #### Step 1: Set Up Scoreboard Web
 
-📖 **[→ Read Full Scoreboard Website README](./game_controller/README.md)**
+📖 **[→ Read Full Scoreboard Website README](./scoreboard-web/README.md)**
 
 #### Step 2: Register a Player
 1. Click "Continue" on welcome screen
@@ -197,7 +198,7 @@ pip install -r requirements.txt
 
 #### Step 3: Set Up Game Controller
 
-📖 **[→ Read Full Python Controller README](./game_controller/README.md)**
+📖 **[→ Read Full Game Controller README](./game_controller/README.MD)**
 
 #### Step 4: Play!
 1. Start Subway Surfers game
@@ -206,6 +207,7 @@ pip install -r requirements.txt
 4. After playing, check the scoreboard for your score
 
 ---
+
 ## 🛠️ Technology Stack
 
 ### Frontend
