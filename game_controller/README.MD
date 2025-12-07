@@ -47,7 +47,7 @@ Start Subway Surfers and keep the game window focused.
 ## Configuration (config.py example)
 - Open config.py and update these values:
 ```python
-COMPUTER_B_IP = "192.168.1.XX"   # IP of gaming PC
+COMPUTER_B_IP = "192.168.1.XX"   # IPv4 of PC B
 CAMERA_INDEX = 0                 # Usually 0 or 1
 PORT = 9999                      # Same port on both PCs
 HEIGHT = 1080
@@ -86,6 +86,13 @@ WIDTH = 1920
 - Only use in environments where webcam use is permitted and safe.
 
 ## Credits
+Aadim Gyawali, Smile Kalu, Riwaj Karki
+
+## Screenshot
+
+<img width="1917" height="1026" alt="image" src="https://github.com/user-attachments/assets/4f89cbc9-894d-4c5b-9f2c-2bf855e23c80" />
+
+
 Built with MediaPipe, OpenCV and PyAutoGUI. Made for hands‑free endless surfing.
 
 Enjoy surfing with your face!
