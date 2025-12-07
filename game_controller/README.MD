@@ -1,3 +1,6 @@
+
+<img width="1917" height="1026" alt="image" src="https://github.com/user-attachments/assets/4f89cbc9-894d-4c5b-9f2c-2bf855e23c80" />
+
 # Head-Controlled Subway Surfers
 
 Control Subway Surfers with head movement — move your nose left/right to change lanes, look up to jump, and look down to slide. Designed for no-hands gaming, streaming, or accessibility demos.
@@ -88,9 +91,7 @@ WIDTH = 1920
 ## Credits
 Aadim Gyawali, Smile Kalu, Riwaj Karki
 
-## Screenshot
 
-<img width="1917" height="1026" alt="image" src="https://github.com/user-attachments/assets/4f89cbc9-894d-4c5b-9f2c-2bf855e23c80" />
 
 
 Built with MediaPipe, OpenCV and PyAutoGUI. Made for hands‑free endless surfing.
