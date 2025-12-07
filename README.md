@@ -25,7 +25,6 @@ This project combines **real-time head-tracking** with a **live competitive scor
 
 | Name | Role |
 |------|------|
-| **Satish Tiwari** | Mentor / Guider |
 | **Aadim Gyawali** | Team Leader & Game Controller Developer |
 | **Smile Kalu** | Website Developer (Scoreboard) |
 | **Riwaj Karki** | UI/UX Designer |
@@ -165,17 +164,23 @@ pip install -r requirements.txt
 
 ## 📊 Screenshots
 
-### Playing the game
-<img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/82b2b2f4-4b38-4042-99cb-7acee220530e" />
+### Game Controller - Head Tracking Interface
+<img width="480" height="270" alt="Head Tracking with MediaPipe" src="https://github.com/user-attachments/assets/4f89cbc9-894d-4c5b-9f2c-2bf855e23c80" />
 
-### A visitor registering his name
-<img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/a9fa0427-47c6-427a-9446-40510d0acda2" />
+### Scoreboard Web - Welcome Screen
+<img width="480" height="270" alt="Welcome Screen" src="https://github.com/user-attachments/assets/7199f27a-924a-406a-8a12-e2de25f7f07d" />
 
-### Our group photo
-<img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/c2683771-0816-4b40-8738-8f36a1c9dfd5" />
+### Scoreboard Web - Team Introduction
+<img width="480" height="270" alt="Team Introduction" src="https://github.com/user-attachments/assets/53430708-c8e5-4091-b4ba-9e50bec1090a" />
 
-### Certificate of participation
-<img width="2048" height="1379" alt="image" src="https://github.com/user-attachments/assets/22e6abba-f431-4b1a-9450-646b98dce840" />
+### Scoreboard Web - Player Registration
+<img width="480" height="270" alt="Player Registration" src="https://github.com/user-attachments/assets/e40c0809-ac74-453c-b6df-50cd3a0db84b" />
+
+### Scoreboard Web - Live Leaderboard
+<img width="480" height="270" alt="Live Leaderboard" src="https://github.com/user-attachments/assets/f3b57dd9-27c5-4ca7-bdcc-df2447b59f81" />
+
+### Scoreboard Web - Score Editing
+<img width="480" height="270" alt="Score Management" src="https://github.com/user-attachments/assets/6c231756-28e1-4974-84a5-04dfe949d530" />
 
 ---
 
@@ -193,7 +198,7 @@ pip install -r requirements.txt
 
 #### Step 3: Set Up Game Controller
 
-📖 **[→ Read Full Game Controller README](./game_controller/README.MD)**
+📖 **[→ Read Full Python Controller README](./game_controller/README.md)**
 
 #### Step 4: Play!
 1. Start Subway Surfers game
@@ -202,7 +207,6 @@ pip install -r requirements.txt
 4. After playing, check the scoreboard for your score
 
 ---
-
 ## 🛠️ Technology Stack
 
 ### Frontend
